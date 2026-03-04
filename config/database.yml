@@ -1,0 +1,39 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+
+development:
+  <<: *default
+  database: math_solver_app_development
+  username: <%= ENV["MATH_SOLVER_APP_DEV_DATABASE_USERNAME"] %>
+  password: <%= ENV["MATH_SOLVER_APP_DEV_DATABASE_PASSWORD"] %>
+
+test:
+  <<: *default
+  database: math_solver_app_test
+  username: <%= ENV["MATH_SOLVER_APP_DEV_DATABASE_USERNAME"] %>
+  password: <%= ENV["MATH_SOLVER_APP_DEV_DATABASE_PASSWORD"] %>
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: math_solver_app_production
+    username: math_solver_app
+    password: <%= ENV["MATH_SOLVER_APP_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: math_solver_app_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: math_solver_app_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: math_solver_app_production_cable
+    migrations_paths: db/cable_migrate
