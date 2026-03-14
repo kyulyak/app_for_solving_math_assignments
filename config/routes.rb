@@ -36,4 +36,12 @@ Rails.application.routes.draw do
       post "/problems/:id/check", to: "problems#check"
     end
   end
+
+  resources :categories, only: [ :index, :show ]
+  resources :tasks, only: [ :show ] do
+    resources :attempts, only: [ :create ]
+    member do
+      get :solution
+    end
+  end
 end
