@@ -1,14 +1,39 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root "pages#home"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # Аутентификация
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # Регистрация
+  resources :users, only: [ :new, :create, :show ]
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Основные ресурсы
+  resources :topics, only: [ :index, :show ] do
+    resources :problems, only: [ :index, :show ]
+  end
+
+  resources :problems do
+    member do
+      post "check"
+      post "favorite"
+      delete "unfavorite"
+    end
+  end
+
+  resources :reference_materials, only: [ :index, :show ]
+
+  # Личный кабинет
+  get "/dashboard", to: "dashboard#index"
+  get "/dashboard/progress", to: "dashboard#progress"
+  get "/dashboard/favorites", to: "dashboard#favorites"
+  get "/dashboard/history", to: "dashboard#history"
+
+  # API для проверки решений
+  namespace :api do
+    namespace :v1 do
+      post "/problems/:id/check", to: "problems#check"
+    end
+  end
 end

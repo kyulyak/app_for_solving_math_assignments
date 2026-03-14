@@ -1,0 +1,57 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- Hero секция -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">
+      Добро пожаловать в Math Solver!
+    </h1>
+    <p class="text-xl text-gray-600 mb-8">
+      Интерактивная платформа для решения и анализа математических задач
+    </p>
+    
+    <% if logged_in? %>
+      <div class="space-x-4">
+        <%= link_to "Перейти к задачам", topics_path, class: "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition" %>
+        <%= link_to "Мой прогресс", dashboard_path, class: "bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition" %>
+      </div>
+    <% else %>
+      <div class="space-x-4">
+        <%= link_to "Войти", login_path, class: "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition" %>
+        <%= link_to "Регистрация", new_user_path, class: "bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Особенности платформы -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-semibold mb-3">📚 Разделы математики</h3>
+      <p class="text-gray-600">Линейная алгебра, матанализ, теория вероятностей и другие разделы</p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-semibold mb-3">📊 Отслеживание прогресса</h3>
+      <p class="text-gray-600">Следите за своим прогрессом и возвращайтесь к решенным задачам</p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-semibold mb-3">⭐ Избранное</h3>
+      <p class="text-gray-600">Сохраняйте интересные задачи и возвращайтесь к ним позже</p>
+    </div>
+  </div>
+
+  <!-- Для залогиненных пользователей -->
+  <% if logged_in? %>
+    <div class="mt-16">
+      <h2 class="text-2xl font-bold mb-6">Недавние задачи</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <% @recent_problems&.each do |problem| %>
+          <div class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+            <h4 class="font-semibold"><%= link_to problem.title, problem %></h4>
+            <p class="text-sm text-gray-600">Тема: <%= problem.topic.title %></p>
+            <p class="text-sm text-gray-500">Сложность: <%= "★" * problem.difficulty %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
