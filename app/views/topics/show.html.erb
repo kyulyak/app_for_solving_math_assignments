@@ -1,0 +1,13 @@
+<h1><%= @topic.title %></h1>
+
+<p><%= @topic.description %></p>
+
+<h2>Задачи</h2>
+
+<ul>
+  <% @problems.each do |problem| %>
+    <li>
+      <%= link_to problem.title, problem_path(problem) %>
+    </li>
+  <% end %>
+</ul>

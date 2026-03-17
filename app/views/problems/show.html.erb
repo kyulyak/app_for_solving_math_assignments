@@ -1,0 +1,40 @@
+<h2><%= @problem.title %></h2>
+
+<p><%= @problem.body %></p>
+
+<% if flash[:result] %>
+  <p><%= flash[:result] %></p>
+<% end %>
+
+<h3>Введите ответ</h3>
+
+<%= form_with url: check_answer_problem_path(@problem), method: :post do %>
+  <%= text_field_tag :submitted_answer %>
+  <%= submit_tag "Проверить" %>
+<% end %>
+
+<br>
+
+<!-- КНОПКА -->
+<button onclick="toggleSolution()">
+  Показать / скрыть решение
+</button>
+
+<!-- БЛОК С РЕШЕНИЕМ -->
+<div id="solution-block" style="display: none; margin-top: 20px;">
+  <h3>Решение</h3>
+  <p><%= @problem.solution_text %></p>
+</div>
+
+<!-- JS -->
+<script>
+  function toggleSolution() {
+    const block = document.getElementById("solution-block");
+
+    if (block.style.display === "none") {
+      block.style.display = "block";
+    } else {
+      block.style.display = "none";
+    }
+  }
+</script>

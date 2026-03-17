@@ -10,6 +10,7 @@ class Problem < ApplicationRecord
   scope :easy, -> { where(difficulty: 1..2) }
   scope :medium, -> { where(difficulty: 3) }
   scope :hard, -> { where(difficulty: 4..5) }
+  scope :published, -> { where(is_published: true) }
 
   def solved_by?(user)
     user_solutions.where(user: user, is_correct: true).exists?

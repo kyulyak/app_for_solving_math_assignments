@@ -1,5 +1,5 @@
 class ProblemsController < ApplicationController
   def show
-    @problem = Problem.find(params[:id])
+    @problems = @topic.problems.published
   end
 end

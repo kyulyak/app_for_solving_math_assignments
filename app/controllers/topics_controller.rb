@@ -5,6 +5,6 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @problems = @topic.problems.where(is_published: true).order(:position)
+    @problems = @topic.problems
   end
 end

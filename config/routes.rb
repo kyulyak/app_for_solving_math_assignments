@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   resources :problems, only: [ :show ] do
     post :check_answer, to: "attempts#create"
-    get :solution, to: "solutions#show"
   end
 
   resources :favorites, only: [ :create, :destroy ]
