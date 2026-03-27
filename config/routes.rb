@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "topics#index"
-
-  resources :topics, only: [ :index, :show ]
+  devise_for :users
+  resources :topics
 
   resources :problems, only: [ :show ] do
     post :check_answer, to: "attempts#create"

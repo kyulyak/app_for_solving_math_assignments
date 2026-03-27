@@ -1,14 +1,17 @@
 class User < ApplicationRecord
-  has_secure_password
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :validatable
 
-  enum role: { student: 0, admin: 1 }
+  enum :role, { student: 0, admin: 1 }
 
   has_many :user_solutions, dependent: :destroy
   has_many :solved_problems, through: :user_solutions, source: :problem
   has_many :favorites, dependent: :destroy
   has_many :favorite_problems, through: :favorites, source: :problem
 
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :first_name, :last_name, presence: true
 
   def progress_by_topic(topic_id)
