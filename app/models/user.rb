@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   enum :role, { student: 0, admin: 1 }
 
-  has_many :user_solutions, dependent: :destroy
+  has_many :attempts, dependent: :destroy
   has_many :solved_problems, through: :user_solutions, source: :problem
   has_many :favorites, dependent: :destroy
   has_many :favorite_problems, through: :favorites, source: :problem

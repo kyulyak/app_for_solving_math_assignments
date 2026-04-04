@@ -1,22 +1,16 @@
 class AttemptsController < ApplicationController
   def create
-    @problem = Problem.find(params[:problem_id])
-    submitted_answer = params[:submitted_answer]
+    problem = Problem.find(params[:attempt][:problem_id])
+    answer = params[:attempt][:answer]
 
-    result = Trainer::AnswerChecker.new(
-      task: @problem,
-      submitted_answer: submitted_answer
-    ).call
-
-    Trainer::ProgressTracker.new(
+    result = Attempts::CreateService.call(
       user: current_user,
-      task: @problem,
-      submitted_answer: submitted_answer,
-      is_correct: result[:correct]
-    ).call
+      problem: problem,
+      answer: answer
+    )
 
     flash[:result] = result[:correct] ? "Ответ верный!" : "Ответ неверный"
 
-    redirect_to problem_path(@problem)
+    redirect_to problem_path(problem)
   end
 end

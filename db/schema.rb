@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_27_183928) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_31_164749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "attempts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "problem_id", null: false
+    t.text "user_answer"
+    t.boolean "is_correct"
+    t.datetime "solved_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["problem_id"], name: "index_attempts_on_problem_id"
+    t.index ["user_id"], name: "index_attempts_on_user_id"
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -53,18 +65,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_183928) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_solutions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "problem_id", null: false
-    t.text "user_answer"
-    t.boolean "is_correct"
-    t.datetime "solved_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["problem_id"], name: "index_user_solutions_on_problem_id"
-    t.index ["user_id"], name: "index_user_solutions_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
@@ -80,10 +80,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_183928) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attempts", "problems"
+  add_foreign_key "attempts", "users"
   add_foreign_key "favorites", "problems"
   add_foreign_key "favorites", "users"
   add_foreign_key "problems", "topics"
   add_foreign_key "reference_materials", "topics"
-  add_foreign_key "user_solutions", "problems"
-  add_foreign_key "user_solutions", "users"
 end

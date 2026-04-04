@@ -1,6 +1,6 @@
 class Problem < ApplicationRecord
   belongs_to :topic
-  has_many :user_solutions, dependent: :destroy
+  has_many :attempts, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
   validates :title, :content, :solution, presence: true

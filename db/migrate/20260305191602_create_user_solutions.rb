@@ -1,6 +1,6 @@
 class CreateUserSolutions < ActiveRecord::Migration[8.0]
   def change
-    create_table :user_solutions do |t|
+    create_table :attempts do |t|
       t.references :user, null: false, foreign_key: true
       t.references :problem, null: false, foreign_key: true
       t.text :user_answer
