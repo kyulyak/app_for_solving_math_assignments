@@ -2,6 +2,7 @@ class Problem < ApplicationRecord
   belongs_to :topic
   has_many :attempts, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  belongs_to :subtopic
 
   validates :title, :content, :solution, presence: true
   validates :difficulty, inclusion: { in: 1..5 }
@@ -25,5 +26,10 @@ class Problem < ApplicationRecord
 
   def normalize_answer(str)
     str.to_s.strip.downcase.gsub(/\s+/, " ")
+  end
+
+  def new
+    @subtopic = Subtopic.find(params[:subtopic_id])
+    @problem = @subtopic.problems.new
   end
 end

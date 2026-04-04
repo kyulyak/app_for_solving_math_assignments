@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_31_164749) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_04_153143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_164749) do
     t.datetime "solved_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "time_spent"
+    t.boolean "shown_solution"
     t.index ["problem_id"], name: "index_attempts_on_problem_id"
     t.index ["user_id"], name: "index_attempts_on_user_id"
   end
@@ -44,6 +46,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_164749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_published", default: true
+    t.string "correct_answer"
+    t.string "problem_type"
+    t.string "subtopic"
     t.index ["topic_id"], name: "index_problems_on_topic_id"
   end
 
@@ -54,6 +59,14 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_164749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["topic_id"], name: "index_reference_materials_on_topic_id"
+  end
+
+  create_table "subtopics", force: :cascade do |t|
+    t.string "title"
+    t.bigint "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_subtopics_on_topic_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -86,4 +99,5 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_31_164749) do
   add_foreign_key "favorites", "users"
   add_foreign_key "problems", "topics"
   add_foreign_key "reference_materials", "topics"
+  add_foreign_key "subtopics", "topics"
 end
