@@ -1,3 +1,6 @@
+Problem.destroy_all
+Subtopic.destroy_all
+Topic.destroy_all
 derivatives = Topic.create!(title: "Производные")
 
 derivatives.subtopics.create!([

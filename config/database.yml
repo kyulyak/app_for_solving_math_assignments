@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: math_solver_app_development
+  database: math_solver_app_development_v2
   username: <%= ENV["MATH_SOLVER_APP_DEV_DATABASE_USERNAME"] %>
   password: <%= ENV["MATH_SOLVER_APP_DEV_DATABASE_PASSWORD"] %>
 

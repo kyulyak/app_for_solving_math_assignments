@@ -1,4 +1,4 @@
 class Subtopic < ApplicationRecord
   belongs_to :topic
-  has_many :problems
+  has_many :problems, dependent: :destroy
 end

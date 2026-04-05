@@ -1,5 +1,4 @@
 class Problem < ApplicationRecord
-  belongs_to :topic
   has_many :attempts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   belongs_to :subtopic

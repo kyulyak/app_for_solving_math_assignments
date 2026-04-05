@@ -1,5 +1,5 @@
 class AddSubtopicToProblems < ActiveRecord::Migration[8.0]
   def change
-    add_column :problems, :subtopic, :string
+    add_reference :problems, :subtopic, null: false, foreign_key: true
   end
 end
