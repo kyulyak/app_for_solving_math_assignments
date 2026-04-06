@@ -1,10 +1,14 @@
-# content	 - условие задачи
-# correct_answer -	правильный ответ
-# solution -	объяснение
-# title	- название (например: "Производная суммы") ОБЯЗАТЕЛЬНО ПРОПИСЫВАТЬ!!
+# content - условие задачи
+# correct_answer - правильный ответ
+# solution - объяснение
+# title - название (например: "Производная суммы") ОБЯЗАТЕЛЬНО ПРОПИСЫВАТЬ!!
+
+require "yaml"
+
 Problem.destroy_all
 Subtopic.destroy_all
 Topic.destroy_all
+
 derivatives = Topic.create!(title: "Производные")
 
 derivatives.subtopics.create!([
@@ -30,23 +34,36 @@ integrals.subtopics.create!([
 ])
 
 limits = Topic.create!(title: "Пределы")
-subtopic = Subtopic.find_by!(title: "Производная суммы")
 
-subtopic.problems.create!([
-  {
-    title: "Производная суммы",
-    content: "Найдите производную: (x^2 + 3x)",
-    correct_answer: "2x + 3",
-    solution: "Производная суммы равна сумме производных: 2x + 3",
-    difficulty: 1,
-    topic: subtopic.topic
-  },
-  {
-    title: "Производная суммы",
-    content: "Найдите производную: (x^3 + x)",
-    correct_answer: "3x^2 + 1",
-    solution: "Применяем правило суммы",
-    difficulty: 1,
-    topic: subtopic.topic
-  }
+limits.subtopics.create!([
+  { title: "Пределы полиномов" },
+  { title: "Подстановка" }
 ])
+
+data = YAML.load_file(Rails.root.join("db", "problems.yml"))
+
+data.each do |key, problems|
+  subtopic_title = case key
+  when "derivative_sum" then "Производная суммы"
+  when "derivative_product" then "Производная произведения"
+  when "derivative_chain" then "Производная сложной функции"
+  when "determinant" then "Определитель матрицы"
+  when "inverse_matrix" then "Обратная матрица"
+  when "matrix_sum" then "Сложение матриц"
+  when "matrix_multiplication" then "Умножение матриц"
+  when "integral_simple" then "Неопределенные интегралы"
+  when "definite_integral" then "Определенные интегралы"
+  when "limits" then "Пределы полиномов"
+  end
+
+  subtopic = Subtopic.find_by!(title: subtopic_title)
+
+  problems.each do |p|
+    subtopic.problems.create!(
+      p.merge(
+        topic: subtopic.topic,
+        solution: p["solution"] || "Решение не указано"
+      )
+    )
+  end
+end

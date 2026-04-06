@@ -1,0 +1,155 @@
+derivative_sum:
+  - title: "Производная суммы"
+    content: "Найдите производную: x^2 + 3x"
+    correct_answer: "2x + 3"
+    solution: "Производная суммы = сумма производных"
+    difficulty: 1
+
+  - title: "Производная суммы"
+    content: "Найдите производную: x^3 + x"
+    correct_answer: "3x^2 + 1"
+    difficulty: 1
+
+  - title: "Производная суммы"
+    content: "Найдите производную: x^4 + 2x"
+    correct_answer: "4x^3 + 2"
+    difficulty: 1
+
+  - title: "Производная суммы"
+    content: "Найдите производную: 5x^2 + 7x"
+    correct_answer: "10x + 7"
+    difficulty: 1
+
+  - title: "Производная суммы"
+    content: "Найдите производную: x^5 + x^2"
+    correct_answer: "5x^4 + 2x"
+    difficulty: 2
+
+derivative_product:
+  - title: "Производная произведения"
+    content: "Найдите производную: x * x^2"
+    correct_answer: "3x^2"
+    difficulty: 1
+
+  - title: "Производная произведения"
+    content: "Найдите производную: x * sin(x)"
+    correct_answer: "sin(x) + x*cos(x)"
+    difficulty: 2
+
+  - title: "Производная произведения"
+    content: "Найдите производную: x^2 * cos(x)"
+    correct_answer: "2x*cos(x) - x^2*sin(x)"
+    difficulty: 2
+
+  - title: "Производная произведения"
+    content: "Найдите производную: x * e^x"
+    correct_answer: "e^x + x*e^x"
+    difficulty: 2
+
+derivative_chain:
+  - title: "Производная сложной функции"
+    content: "Найдите производную: (x^2 + 1)^2"
+    correct_answer: "4x(x^2+1)"
+    difficulty: 2
+
+  - title: "Производная сложной функции"
+    content: "Найдите производную: sin(x^2)"
+    correct_answer: "2x*cos(x^2)"
+    difficulty: 2
+
+  - title: "Производная сложной функции"
+    content: "Найдите производную: e^(x^2)"
+    correct_answer: "2x*e^(x^2)"
+    difficulty: 2
+
+determinant:
+  - title: "Определитель матрицы"
+    content: "Найдите det([[1,2],[3,4]])"
+    correct_answer: "-2"
+    difficulty: 1
+
+  - title: "Определитель матрицы"
+    content: "Найдите det([[2,3],[1,5]])"
+    correct_answer: "7"
+    difficulty: 1
+
+  - title: "Определитель матрицы"
+    content: "Найдите det([[4,2],[3,1]])"
+    correct_answer: "-2"
+    difficulty: 1
+
+inverse_matrix:
+  - title: "Обратная матрица"
+    content: "Найдите обратную матрицу [[1,2],[3,4]]"
+    correct_answer: "[[-2,1],[1.5,-0.5]]"
+    difficulty: 3
+
+matrix_sum:
+  - title: "Сложение матриц"
+    content: "[[1,2]] + [[3,4]]"
+    correct_answer: "[[4,6]]"
+    difficulty: 1
+
+  - title: "Сложение матриц"
+    content: "[[2,3]] + [[1,5]]"
+    correct_answer: "[[3,8]]"
+    difficulty: 1
+
+matrix_multiplication:
+  - title: "Умножение матриц"
+    content: "[[1,2]] * [[3],[4]]"
+    correct_answer: "[[11]]"
+    difficulty: 2
+
+integral_simple:
+  - title: "Неопределенный интеграл"
+    content: "∫ x dx"
+    correct_answer: "x^2/2 + C"
+    difficulty: 1
+
+  - title: "Неопределенный интеграл"
+    content: "∫ x^2 dx"
+    correct_answer: "x^3/3 + C"
+    difficulty: 1
+
+  - title: "Неопределенный интеграл"
+    content: "∫ 2x dx"
+    correct_answer: "x^2 + C"
+    difficulty: 1
+
+  - title: "Неопределенный интеграл"
+    content: "∫ 3x^2 dx"
+    correct_answer: "x^3 + C"
+    difficulty: 1
+
+definite_integral:
+  - title: "Определенный интеграл"
+    content: "∫[0,1] x dx"
+    correct_answer: "0.5"
+    difficulty: 1
+
+  - title: "Определенный интеграл"
+    content: "∫[0,2] x dx"
+    correct_answer: "2"
+    difficulty: 1
+
+limits:
+  - title: "Пределы"
+    content: "lim x→2 (x^2)"
+    correct_answer: "4"
+    difficulty: 1
+
+  - title: "Пределы"
+    content: "lim x→3 (x^2)"
+    correct_answer: "9"
+    difficulty: 1
+
+  - title: "Пределы"
+    content: "lim x→1 (x^3)"
+    correct_answer: "1"
+    difficulty: 1
+
+  - title: "Пределы"
+    content: "lim x→0 (sin(x)/x)"
+    correct_answer: "1"
+    difficulty: 2
