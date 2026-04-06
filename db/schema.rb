@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_05_121213) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_06_115411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,13 +42,13 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_05_121213) do
     t.text "content"
     t.text "solution"
     t.integer "difficulty"
-    t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_published", default: true
     t.string "correct_answer"
     t.string "problem_type"
     t.bigint "subtopic_id", null: false
+    t.bigint "topic_id", null: false
     t.index ["subtopic_id"], name: "index_problems_on_subtopic_id"
     t.index ["topic_id"], name: "index_problems_on_topic_id"
   end

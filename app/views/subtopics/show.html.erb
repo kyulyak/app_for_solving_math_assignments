@@ -1,17 +1,22 @@
-<h1 class="text-2xl font-bold mb-6">
-  <%= @topic.title %> → <%= @subtopic.title %>
-</h1>
+<h1 class="text-2xl font-bold mb-4"><%= @subtopic.title %></h1>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <% @problems.each do |problem| %>
-    <div class="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="font-semibold">
-        <%= link_to problem.title, problem_path(problem) %>
-      </h3>
+<% @problems.each do |problem| %>
+  <div class="bg-white p-4 rounded shadow mb-4">
+    
+    <!-- Название задачи -->
+    <h2 class="font-semibold text-lg mb-2">
+      <%= problem.title %>
+    </h2>
 
-      <p class="text-sm text-gray-500">
-        Сложность: <%= "★" * problem.difficulty %>
-      </p>
-    </div>
-  <% end %>
-</div>
+    <!-- Условие -->
+    <p class="mb-3">
+      <%= problem.content %>
+    </p>
+
+    <!-- Кнопка -->
+    <%= link_to "Решить",
+        topic_subtopic_problem_path(@topic, @subtopic, problem),
+        class: "text-blue-500 underline" %>
+
+  </div>
+<% end %>

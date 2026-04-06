@@ -1,7 +1,10 @@
 class Problem < ApplicationRecord
   has_many :attempts, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  belongs_to :subtopic
+  belongs_to :topic
+  belongs_to :subtopic, optional: true
+  # delegate :topic, to: :subtopic
+
 
   validates :title, :content, :solution, presence: true
   validates :difficulty, inclusion: { in: 1..5 }
@@ -13,22 +16,17 @@ class Problem < ApplicationRecord
   scope :published, -> { where(is_published: true) }
 
   def solved_by?(user)
-    user_solutions.where(user: user, is_correct: true).exists?
+    attempts.where(user: user, is_correct: true).exists?
   end
 
   def check_answer(answer)
     # Базовая проверка - можно расширить для разных типов задач
-    normalize_answer(answer) == normalize_answer(solution)
+    normalize_answer(answer) == normalize_answer(correct_answer)
   end
 
   private
 
   def normalize_answer(str)
     str.to_s.strip.downcase.gsub(/\s+/, " ")
-  end
-
-  def new
-    @subtopic = Subtopic.find(params[:subtopic_id])
-    @problem = @subtopic.problems.new
   end
 end

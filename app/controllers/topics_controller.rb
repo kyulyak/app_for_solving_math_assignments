@@ -5,6 +5,10 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
-    @problems = @topic.problems
+    if @topic.has_subtopics?
+    @subtopics = @topic.subtopics
+    else
+      @problems = @topic.problems
+    end
   end
 end
