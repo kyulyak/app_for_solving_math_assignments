@@ -1,0 +1,10 @@
+ru:
+  devise:
+    sessions:
+      signed_in: "Вы успешно вошли в систему."
+      signed_out: "Вы вышли из системы."
+    failure:
+      invalid: "Неверная электронная почта или пароль."
+      unauthenticated: "Сначала войдите в систему."
+    registrations:
+      signed_up: "Вы успешно зарегистрировались."

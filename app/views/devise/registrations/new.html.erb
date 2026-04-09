@@ -1,0 +1,38 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-card__header">
+      <h1>Регистрация</h1>
+      <p>Создайте аккаунт для работы с математической платформой</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email, "Электронная почта" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "Пароль" %>
+        <% if @minimum_password_length %>
+          <small class="hint">Минимум символов: <%= @minimum_password_length %></small>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "Подтверждение пароля" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Зарегистрироваться", class: "auth-button" %>
+      </div>
+    <% end %>
+
+    <div class="auth-links">
+      <%= link_to "Уже есть аккаунт? Войти", new_session_path(resource_name) %>
+    </div>
+  </div>
+</div>

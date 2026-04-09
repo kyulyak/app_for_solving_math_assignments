@@ -1,6 +1,8 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @recent_solutions = current_user.user_solutions
+    @recent_solutions = current_user.attempts
                                     .includes(:problem)
                                     .order(created_at: :desc)
                                     .limit(10)
@@ -14,7 +16,7 @@ class DashboardController < ApplicationController
     end
 
     @favorites_count = current_user.favorites.count
-    @total_solved = current_user.user_solutions
+    @total_solved = current_user.attempts
                                 .where(is_correct: true)
                                 .select(:problem_id)
                                 .distinct
@@ -35,9 +37,9 @@ class DashboardController < ApplicationController
   end
 
   def history
-    @solutions = current_user.user_solutions
-                            .includes(problem: :topic)
-                            .order(created_at: :desc)
-                            .page(params[:page])
+    @solutions = current_user.attempts
+                             .includes(problem: :topic)
+                             .order(created_at: :desc)
+                             .page(params[:page])
   end
 end

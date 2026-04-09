@@ -3,12 +3,10 @@
 </h1>
 
 <p class="mb-4">
-  <%= @problem.content %>
+  <%= flash[:generated_content] || @generated_problem["content"] %>
 </p>
 
-<%= form_with url: check_answer_problem_path(@problem), method: :post do %>
-  <%= hidden_field_tag :problem_id, @problem.id %>
-
+<%= form_with url: check_answer_topic_subtopic_problem_path(@topic, @subtopic, @problem), method: :post, local: true do %>
   <%= label_tag :submitted_answer, "Ваш ответ" %><br>
   <%= text_field_tag :submitted_answer, nil, class: "border p-2 mb-2" %><br>
 
@@ -19,8 +17,14 @@
   <p class="mt-4 font-bold"><%= flash[:result] %></p>
 <% end %>
 
-<!-- Показ решения -->
-<details class="mt-4">
-  <summary class="cursor-pointer text-blue-600">Показать решение</summary>
-  <p class="mt-2"><%= @problem.solution %></p>
-</details>
+<% if flash[:solution] %>
+  <details class="mt-4" open>
+    <summary class="cursor-pointer text-blue-600">Показать решение</summary>
+    <p class="mt-2"><%= flash[:solution] %></p>
+  </details>
+<% else %>
+  <details class="mt-4">
+    <summary class="cursor-pointer text-blue-600">Показать решение</summary>
+    <p class="mt-2"><%= @generated_problem["solution"] %></p>
+  </details>
+<% end %>

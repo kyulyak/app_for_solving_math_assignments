@@ -3,8 +3,6 @@
 # solution - объяснение
 # title - название (например: "Производная суммы") ОБЯЗАТЕЛЬНО ПРОПИСЫВАТЬ!!
 
-require "yaml"
-
 Problem.destroy_all
 Subtopic.destroy_all
 Topic.destroy_all
@@ -40,30 +38,13 @@ limits.subtopics.create!([
   { title: "Подстановка" }
 ])
 
-data = YAML.load_file(Rails.root.join("db", "problems.yml"))
+subtopic = Subtopic.find_by!(title: "Производная суммы")
 
-data.each do |key, problems|
-  subtopic_title = case key
-  when "derivative_sum" then "Производная суммы"
-  when "derivative_product" then "Производная произведения"
-  when "derivative_chain" then "Производная сложной функции"
-  when "determinant" then "Определитель матрицы"
-  when "inverse_matrix" then "Обратная матрица"
-  when "matrix_sum" then "Сложение матриц"
-  when "matrix_multiplication" then "Умножение матриц"
-  when "integral_simple" then "Неопределенные интегралы"
-  when "definite_integral" then "Определенные интегралы"
-  when "limits" then "Пределы полиномов"
-  end
-
-  subtopic = Subtopic.find_by!(title: subtopic_title)
-
-  problems.each do |p|
-    subtopic.problems.create!(
-      p.merge(
-        topic: subtopic.topic,
-        solution: p["solution"] || "Решение не указано"
-      )
-    )
-  end
-end
+subtopic.problems.create!(
+  title: "Производная суммы",
+  topic: subtopic.topic,
+  subtopic: subtopic,
+  difficulty: 1,
+  problem_type: "derivative_sum",
+  is_published: true
+)

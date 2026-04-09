@@ -1,13 +1,16 @@
 class Problem < ApplicationRecord
   has_many :attempts, dependent: :destroy
   has_many :favorites, dependent: :destroy
+
   belongs_to :topic
   belongs_to :subtopic, optional: true
-  # delegate :topic, to: :subtopic
 
-
-  validates :title, :content, :solution, presence: true
+  validates :title, presence: true
   validates :difficulty, inclusion: { in: 1..5 }
+
+  with_options unless: :template_problem? do
+    validates :content, :solution, :correct_answer, presence: true
+  end
 
   scope :by_difficulty, ->(level) { where(difficulty: level) }
   scope :easy, -> { where(difficulty: 1..2) }
@@ -19,8 +22,11 @@ class Problem < ApplicationRecord
     attempts.where(user: user, is_correct: true).exists?
   end
 
+  def template_problem?
+    problem_type.present?
+  end
+
   def check_answer(answer)
-    # Базовая проверка - можно расширить для разных типов задач
     normalize_answer(answer) == normalize_answer(correct_answer)
   end
 
