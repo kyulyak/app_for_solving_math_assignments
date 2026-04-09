@@ -1,37 +1,37 @@
-<div class="auth-wrapper">
+<div class="auth-page">
   <div class="auth-card">
-    <div class="auth-card__header">
-      <h1>Регистрация</h1>
-      <p>Создайте аккаунт для работы с математической платформой</p>
+    <div class="auth-card__top">
+      <h1 class="auth-title">Регистрация</h1>
+      <p class="auth-subtitle">Создайте аккаунт для работы с математической платформой</p>
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="field">
-        <%= f.label :email, "Электронная почта" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+      <div class="form-group">
+        <%= f.label :email, "Электронная почта", class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
       </div>
 
-      <div class="field">
-        <%= f.label :password, "Пароль" %>
+      <div class="form-group">
+        <%= f.label :password, "Пароль", class: "form-label" %>
         <% if @minimum_password_length %>
-          <small class="hint">Минимум символов: <%= @minimum_password_length %></small>
+          <div class="form-hint">Минимум символов: <%= @minimum_password_length %></div>
         <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-input" %>
       </div>
 
-      <div class="field">
-        <%= f.label :password_confirmation, "Подтверждение пароля" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Подтверждение пароля", class: "form-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
       </div>
 
-      <div class="actions">
-        <%= f.submit "Зарегистрироваться", class: "auth-button" %>
+      <div>
+        <%= f.submit "Зарегистрироваться", class: "auth-submit" %>
       </div>
     <% end %>
 
-    <div class="auth-links">
+    <div class="auth-footer-links">
       <%= link_to "Уже есть аккаунт? Войти", new_session_path(resource_name) %>
     </div>
   </div>
