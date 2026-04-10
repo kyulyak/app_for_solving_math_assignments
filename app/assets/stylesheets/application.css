@@ -2,9 +2,7 @@
  *= require_tree .
  *= require_self
  */
-body {
-  background: red !important;
-}
+
 * {
   box-sizing: border-box;
 }

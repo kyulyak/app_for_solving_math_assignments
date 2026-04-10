@@ -6,7 +6,7 @@
   <%= flash[:generated_content] || @generated_problem["content"] %>
 </p>
 
-<%= form_with url: check_answer_topic_subtopic_problem_path(@topic, @subtopic, @problem), method: :post, local: true do %>
+<%= form_with url: check_answer_problem_path(@problem), method: :post, local: true do %>
   <%= label_tag :submitted_answer, "Ваш ответ" %><br>
   <%= text_field_tag :submitted_answer, nil, class: "border p-2 mb-2" %><br>
 
