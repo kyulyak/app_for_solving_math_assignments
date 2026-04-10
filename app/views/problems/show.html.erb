@@ -1,30 +1,51 @@
-<h1 class="text-2xl font-bold mb-4">
-  <%= @problem.title %>
-</h1>
+<h1 class="text-2xl font-bold mb-4"><%= @problem.title %></h1>
 
-<p class="mb-4">
-  <%= flash[:generated_content] || @generated_problem["content"] %>
-</p>
+<div class="mb-4">
+  <p><%= @generated_problem["content"] %></p>
+</div>
 
-<%= form_with url: check_answer_problem_path(@problem), method: :post, local: true do %>
-  <%= label_tag :submitted_answer, "Ваш ответ" %><br>
-  <%= text_field_tag :submitted_answer, nil, class: "border p-2 mb-2" %><br>
+<% if @check_result.present? %>
+  <div class="mt-4 p-4 border rounded bg-gray-50">
+    <p class="font-bold mb-2">
+      <%= @check_result[:correct] ? "Ответ правильный!" : "Ответ неправильный!" %>
+    </p>
 
-  <%= submit_tag "Проверить", class: "bg-blue-500 text-white px-4 py-2 rounded" %>
-<% end %>
+    <p><strong>Ваш ответ:</strong> <%= @check_result[:submitted_answer].presence || "—" %></p>
 
-<% if flash[:result] %>
-  <p class="mt-4 font-bold"><%= flash[:result] %></p>
-<% end %>
+    <% unless @check_result[:correct] %>
+      <p><strong>Правильный ответ:</strong> <%= @check_result[:correct_answer] %></p>
+    <% end %>
+  </div>
 
-<% if flash[:solution] %>
-  <details class="mt-4" open>
-    <summary class="cursor-pointer text-blue-600">Показать решение</summary>
-    <p class="mt-2"><%= flash[:solution] %></p>
-  </details>
+  <div class="mt-4">
+    <details class="border rounded p-3 bg-white">
+      <summary class="cursor-pointer font-semibold">
+        Показать решение
+      </summary>
+
+      <div class="mt-3">
+        <p><%= @generated_problem["solution"] %></p>
+      </div>
+    </details>
+  </div>
+
+  <div class="mt-4">
+    <%= button_to "Следующая задача",
+          next_generated_topic_subtopic_problem_path(@topic, @subtopic, @problem),
+          method: :post,
+          class: "bg-green-600 text-white px-4 py-2 rounded" %>
+  </div>
+
 <% else %>
-  <details class="mt-4">
-    <summary class="cursor-pointer text-blue-600">Показать решение</summary>
-    <p class="mt-2"><%= @generated_problem["solution"] %></p>
-  </details>
+  <%= form_with url: check_answer_topic_subtopic_problem_path(@topic, @subtopic, @problem),
+                method: :post,
+                local: true,
+                data: { turbo: false } do %>
+    <div class="mb-3">
+      <%= label_tag :submitted_answer, "Ваш ответ" %><br>
+      <%= text_field_tag :submitted_answer, nil, class: "border p-2 rounded w-full" %>
+    </div>
+
+    <%= submit_tag "Проверить", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+  <% end %>
 <% end %>

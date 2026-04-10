@@ -10,12 +10,11 @@ Rails.application.routes.draw do
 
   resources :topics do
     resources :subtopics, only: [ :show ] do
-      resources :problems, only: [ :show ]
+      resources :problems, only: [ :show ] do
+        post :check_answer, on: :member
+        post :next_generated, on: :member
+      end
     end
-  end
-
-  resources :problems, only: [ :show ] do
-    post :check_answer, on: :member
   end
 
   resources :favorites, only: [ :create, :destroy ]
