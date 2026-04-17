@@ -2,27 +2,16 @@ class ProblemsController < ApplicationController
   before_action :set_problem_context, only: [ :show, :check_answer, :next_generated ]
 
   def show
-    session[:generated_problems] ||= {}
-
-    @generated_problem = session[:generated_problems][@problem.id.to_s]
-
-    unless @generated_problem
-      @generated_problem = generate_problem_data
-      session[:generated_problems][@problem.id.to_s] = @generated_problem
-    end
-
+    @generated_problem = generate_problem_data
     @check_result = nil
   end
 
   def check_answer
-    session[:generated_problems] ||= {}
-
-    @generated_problem = session[:generated_problems][@problem.id.to_s]
-
-    unless @generated_problem
-      @generated_problem = generate_problem_data
-      session[:generated_problems][@problem.id.to_s] = @generated_problem
-    end
+    @generated_problem = {
+      "content" => params[:generated_content],
+      "correct_answer" => params[:generated_correct_answer],
+      "solution" => params[:generated_solution]
+    }
 
     submitted_answer = params[:submitted_answer]
 
@@ -44,9 +33,6 @@ class ProblemsController < ApplicationController
   end
 
   def next_generated
-    session[:generated_problems] ||= {}
-    session[:generated_problems].delete(@problem.id.to_s)
-
     redirect_to topic_subtopic_problem_path(@topic, @subtopic, @problem)
   end
 

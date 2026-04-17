@@ -41,6 +41,11 @@
                 method: :post,
                 local: true,
                 data: { turbo: false } do %>
+
+    <%= hidden_field_tag :generated_content, @generated_problem["content"] %>
+    <%= hidden_field_tag :generated_correct_answer, @generated_problem["correct_answer"] %>
+    <%= hidden_field_tag :generated_solution, @generated_problem["solution"] %>
+
     <div class="mb-3">
       <%= label_tag :submitted_answer, "Ваш ответ" %><br>
       <%= text_field_tag :submitted_answer, nil, class: "border p-2 rounded w-full" %>
