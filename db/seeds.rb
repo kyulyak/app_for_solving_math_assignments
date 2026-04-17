@@ -48,3 +48,25 @@ subtopic.problems.create!(
   problem_type: "derivative_sum",
   is_published: true
 )
+
+subtopic = Subtopic.find_by!(title: "Производная произведения")
+
+subtopic.problems.create!(
+  title: "Производная произведения",
+  topic: subtopic.topic,
+  subtopic: subtopic,
+  difficulty: 1,
+  problem_type: "derivative_product",
+  is_published: true
+)
+
+subtopic = Subtopic.find_by!(title: "Производная сложной функции")
+
+subtopic.problems.create!(
+  title: "Производная сложной функции",
+  topic: subtopic.topic,
+  subtopic: subtopic,
+  difficulty: 1,
+  problem_type: "derivative_composite",
+  is_published: true
+)
