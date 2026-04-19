@@ -265,3 +265,245 @@ body.app-body {
     font-size: 28px;
   }
 }
+/*
+.topics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.reference-button {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.reference-button:hover {
+  background: #1d4ed8;
+}
+
+.reference-page,
+.reference-topic-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.page-title {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #0f172a;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.topic-card {
+  display: flex;
+  align-items: center;
+  min-height: 120px;
+  padding: 24px 28px;
+  background: white;
+  border-radius: 18px;
+  text-decoration: none;
+  color: #0f172a;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.topic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.theory-content {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  line-height: 1.7;
+}
+
+.theory-content h2 {
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.theory-content details {
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #f8fbff;
+}
+
+.theory-content summary {
+  cursor: pointer;
+  font-size: 18px;
+  color: #1e3a8a;
+}
+
+.theory-content ul {
+  margin-top: 12px;
+  padding-left: 22px;
+}
+
+.theory-content li {
+  margin-bottom: 8px;
+}*/
+/* Справочный материал - новая верстка */
+
+.reference-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #0f172a;
+  text-align: center;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.topic-card {
+  display: block;
+  background: white;
+  border-radius: 24px;
+  padding: 28px 32px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2ff;
+}
+
+.topic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+  border-color: #c7d2fe;
+}
+
+.topic-card__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.topic-card__description {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.topic-card__button {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2563eb;
+  transition: transform 0.2s ease;
+}
+
+.topic-card:hover .topic-card__button {
+  transform: translateX(4px);
+}
+
+
+.reference-footer {
+  text-align: center;
+  padding-top: 32px;
+  font-size: 14px;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Большая кнопка на главной */
+.reference-main-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  text-decoration: none;
+  padding: 16px 40px;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.reference-main-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+}
+
+@media (max-width: 768px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .topic-card {
+    padding: 22px 24px;
+  }
+  
+  .topic-card__title {
+    font-size: 22px;
+  }
+  
+  .popular-section {
+    padding: 28px 20px;
+  }
+  
+  .popular-title {
+    font-size: 24px;
+  }
+  
+  .popular-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-title {
+    font-size: 32px;
+  }
+}

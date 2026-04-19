@@ -1,22 +1,111 @@
-<h1 class="text-2xl font-bold mb-4"><%= @subtopic.title %></h1>
+<style>
+.subtopic-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
 
-<% @problems.each do |problem| %>
-  <div class="bg-white p-4 rounded shadow mb-4">
-    
-    <!-- Название задачи -->
-    <h2 class="font-semibold text-lg mb-2">
-      <%= problem.title %>
-    </h2>
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
 
-    <!-- Условие -->
-    <p class="mb-3">
-      <%= problem.content %>
-    </p>
+.back-link:hover {
+  text-decoration: underline;
+}
 
-    <!-- Кнопка -->
-    <%= link_to "Решить",
-        topic_subtopic_problem_path(@topic, @subtopic, problem),
-        class: "text-blue-500 underline" %>
+.subtopic-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 32px;
+}
 
+.problems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.problem-card {
+  background: white;
+  padding: 24px 28px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2ff;
+  transition: all 0.3s ease;
+}
+
+.problem-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: #c7d2fe;
+}
+
+.problem-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.problem-content {
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.solve-link {
+  display: inline-block;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.solve-link:hover {
+  transform: translateX(4px);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .subtopic-page {
+    padding: 20px 16px;
+  }
+  .subtopic-title {
+    font-size: 32px;
+  }
+  .problem-card {
+    padding: 18px 20px;
+  }
+  .problem-title {
+    font-size: 18px;
+  }
+}
+</style>
+
+<div class="subtopic-page">
+  <%= link_to "← Назад ", topic_path(@topic), class: "back-link" %>
+
+  <h1 class="subtopic-title"></h1>
+
+  <div class="problems-list">
+    <% @problems.each do |problem| %>
+      <div class="problem-card">
+        <h2 class="problem-title">
+          <%= problem.title %>
+        </h2>
+        <p class="problem-content">
+          <%= problem.content %>
+        </p>
+        <%= link_to "Решить →", topic_subtopic_problem_path(@topic, @subtopic, problem), class: "solve-link" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

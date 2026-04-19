@@ -1,11 +1,123 @@
-<h1 class="text-3xl font-bold mb-6">Темы</h1>
+<style>
+.topics-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <% @topics.each do |topic| %>
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-      <h3 class="text-lg font-semibold">
-        <%= link_to topic.title, topic_path(topic) %>
-      </h3>
-    </div>
-  <% end %>
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 32px;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.topic-card {
+  background: white;
+  padding: 32px 28px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2ff;
+  transition: all 0.3s ease;
+}
+
+.topic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.12);
+  border-color: #c7d2fe;
+}
+
+.topic-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.topic-title a {
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.topic-title a:hover {
+  color: #2563eb;
+}
+
+.reference-button-wrapper {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.reference-main-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  text-decoration: none;
+  padding: 16px 48px;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.reference-main-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+}
+
+@media (max-width: 768px) {
+  .topics-page {
+    padding: 20px 16px;
+  }
+  
+  .topics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .topic-card {
+    padding: 24px 20px;
+  }
+  
+  .topic-title {
+    font-size: 20px;
+  }
+  
+  .page-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+  
+  .reference-main-button {
+    padding: 14px 32px;
+    font-size: 16px;
+  }
+}
+</style>
+
+<div class="topics-page">
+  <h1 class="page-title">Темы</h1>
+
+  <div class="topics-grid">
+    <% @topics.each do |topic| %>
+      <div class="topic-card">
+        <h3 class="topic-title">
+          <%= link_to topic.title, topic_path(topic) %>
+        </h3>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="reference-button-wrapper">
+    <%= link_to "Справочный материал", reference_path, class: "reference-main-button" %>
+  </div>
 </div>

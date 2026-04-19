@@ -1,0 +1,86 @@
+<style>
+.reference-topic-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #0f172a;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.theory-content {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  line-height: 1.7;
+}
+
+.theory-content h2 {
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.theory-content details {
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  background: #f8fbff;
+}
+
+.theory-content summary {
+  cursor: pointer;
+  font-size: 18px;
+  color: #1e3a8a;
+}
+
+.theory-content ul {
+  margin-top: 12px;
+  padding-left: 22px;
+}
+
+.theory-content li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .reference-topic-page {
+    padding: 20px 16px;
+  }
+  .page-title {
+    font-size: 32px;
+  }
+  .theory-content {
+    padding: 20px;
+  }
+}
+</style>
+
+<div class="reference-topic-page">
+  <div class="mb-4">
+    <%= link_to "← Назад ", reference_path, class: "back-link" %>
+  </div>
+
+  <h1 class="page-title"></h1>
+
+  <div class="theory-content">
+    <%= @theory.html_safe %>
+  </div>
+</div>

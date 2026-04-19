@@ -1,27 +1,103 @@
-<h1 class="text-3xl font-bold mb-6"><%= @topic.title %></h1>
+<style>
+.topic-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
 
-<% if @subtopics.present? %>
-  <h2 class="text-xl mb-4">Подтемы</h2>
-<% else %>
-  <h2 class="text-xl mb-4">Задачи</h2>
-<% end %>
+.topic-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+.subtitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 24px;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.item-card {
+  background: white;
+  padding: 28px 24px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2ff;
+  transition: all 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+  border-color: #c7d2fe;
+}
+
+.item-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.item-title a {
+  color: #1e293b;
+  text-decoration: none;
+}
+
+.item-title a:hover {
+  color: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .topic-page {
+    padding: 20px 16px;
+  }
+  .topic-title {
+    font-size: 32px;
+  }
+  .items-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .item-card {
+    padding: 20px;
+  }
+}
+</style>
+
+<div class="topic-page">
+  <h1 class="topic-title"></h1>
+
   <% if @subtopics.present? %>
-    <% @subtopics.each do |subtopic| %>
-      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-        <h3 class="text-lg font-semibold">
-          <%= link_to subtopic.title, topic_subtopic_path(@topic, subtopic) %>
-        </h3>
-      </div>
-    <% end %>
+    <h2 class="subtitle">Подтемы</h2>
   <% else %>
-    <% @problems.each do |problem| %>
-      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-        <h3 class="text-lg font-semibold">
-          <%= link_to problem.title, problem_path(problem) %>
-        </h3>
-      </div>
-    <% end %>
+    <h2 class="subtitle">Задачи</h2>
   <% end %>
+
+  <div class="items-grid">
+    <% if @subtopics.present? %>
+      <% @subtopics.each do |subtopic| %>
+        <div class="item-card">
+          <h3 class="item-title">
+            <%= link_to subtopic.title, topic_subtopic_path(@topic, subtopic) %>
+          </h3>
+        </div>
+      <% end %>
+    <% else %>
+      <% @problems.each do |problem| %>
+        <div class="item-card">
+          <h3 class="item-title">
+            <%= link_to problem.title, problem_path(problem) %>
+          </h3>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get "dashboard/favorites", to: "dashboard#favorites", as: :dashboard_favorites
   get "dashboard/history", to: "dashboard#history", as: :dashboard_history
 
+  get "/reference", to: "reference#index", as: :reference
+  get "/reference/:topic_id", to: "reference#show", as: :reference_topic
+
   resources :topics do
     resources :subtopics, only: [ :show ] do
       resources :problems, only: [ :show ] do

@@ -1,0 +1,139 @@
+<style>
+.reference-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #0f172a;
+  text-align: center;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.topic-card {
+  display: block;
+  background: white;
+  border-radius: 24px;
+  padding: 28px 32px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2ff;
+}
+
+.topic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+  border-color: #c7d2fe;
+}
+
+.topic-card__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.topic-card__description {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.topic-card__button {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2563eb;
+  transition: transform 0.2s ease;
+}
+
+.topic-card:hover .topic-card__button {
+  transform: translateX(4px);
+}
+
+.reference-footer {
+  text-align: center;
+  padding-top: 32px;
+  font-size: 14px;
+  color: #94a3b8;
+  border-top: 1px solid #e2e8f0;
+}
+
+.reference-main-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  text-decoration: none;
+  padding: 16px 40px;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.reference-main-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+}
+
+@media (max-width: 768px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+  .topic-card__title {
+    font-size: 22px;
+  }
+  .page-title {
+    font-size: 32px;
+  }
+}
+</style>
+
+<div class="reference-page">
+  <h1 class="page-title">Справочный материал</h1>
+  <p class="page-subtitle">Выберите тему, чтобы изучить теоретический материал</p>
+
+  <div class="topics-grid">
+    <% @topics.each do |topic| %>
+      <%= link_to reference_topic_path(topic), class: "topic-card" do %>
+        <div class="topic-card__content">
+          <h3 class="topic-card__title"><%= topic.title %></h3>
+          <p class="topic-card__description">
+            <% case topic.title %>
+            <% when "Производные" %>
+              Правила дифференцирования, таблицы производных, примеры решения
+            <% when "Интегралы" %>
+              Таблица интегралов, методы интегрирования, примеры решения
+            <% when "Пределы" %>
+              Основные пределы, свойства, раскрытие неопределённостей
+            <% when "Матрицы" %>
+              Операции с матрицами, определители, обратные матрицы, примеры
+            <% else %>
+              Изучите теоретический материал и примеры
+            <% end %>
+          </p>
+          <span class="topic-card__button">Изучить →</span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
