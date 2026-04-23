@@ -1,188 +1,192 @@
 <style>
-.problem-page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 32px 24px;
-}
-
-.back-link {
-  display: inline-block;
-  margin-bottom: 24px;
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-.problem-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 24px;
-}
-
-.problem-content {
-  background: #f8fafc;
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  margin-bottom: 24px;
-  font-size: 17px;
-  line-height: 1.6;
-  color: #1e293b;
-}
-
-.result-box {
-  margin-top: 24px;
-  padding: 20px;
-  border-radius: 16px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-}
-
-.result-correct {
-  background: #f0fdf4;
-  border-color: #bbf7d0;
-}
-
-.result-correct .result-text {
-  color: #166534;
-}
-
-.result-incorrect {
-  background: #fef2f2;
-  border-color: #fecaca;
-}
-
-.result-incorrect .result-text {
-  color: #991b1b;
-}
-
-.result-text {
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.answer-line {
-  margin-bottom: 8px;
-  font-size: 15px;
-  color: #475569;
-}
-
-.correct-answer {
-  font-size: 15px;
-  color: #475569;
-}
-
-.solution-details {
-  margin-top: 16px;
-  border-top: 1px solid #e2e8f0;
-  padding-top: 16px;
-}
-
-.solution-summary {
-  cursor: pointer;
-  font-weight: 600;
-  color: #2563eb;
-  font-size: 15px;
-}
-
-.solution-content {
-  margin-top: 16px;
-  padding: 16px;
-  background: white;
-  border-radius: 12px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: #334155;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #334155;
-}
-
-.form-input {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #cbd5e1;
-  font-size: 15px;
-  outline: none;
-  transition: all 0.2s;
-}
-
-.form-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.submit-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-.next-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  text-decoration: none;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 16px;
-}
-
-.next-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-@media (max-width: 768px) {
   .problem-page {
-    padding: 20px 16px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px;
   }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
   .problem-title {
-    font-size: 26px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
   }
+
   .problem-content {
-    padding: 18px;
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 24px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #1e293b;
   }
-}
+
+  .result-box {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+  }
+
+  .result-correct {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+
+  .result-correct .result-text {
+    color: #166534;
+  }
+
+  .result-incorrect {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .result-incorrect .result-text {
+    color: #991b1b;
+  }
+
+  .result-text {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .answer-line {
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #475569;
+  }
+
+  .solution-details {
+    margin-top: 16px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+  }
+
+  .solution-summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #2563eb;
+    font-size: 15px;
+  }
+
+  .solution-content {
+    margin-top: 16px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #334155;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #334155;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .form-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .submit-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+
+  .next-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .next-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .problem-page {
+      padding: 20px 16px;
+    }
+
+    .problem-title {
+      font-size: 26px;
+    }
+
+    .problem-content {
+      padding: 18px;
+    }
+  }
 </style>
 
 <div class="problem-page">
-  <%= link_to "← Назад ", topic_subtopic_path(@topic, @subtopic), class: "back-link" %>
+  <%= link_to "← Назад", topic_subtopic_path(@topic, @subtopic), class: "back-link" %>
 
-  <h1 class="problem-title"></h1>
+  <h1 class="problem-title"><%= @problem.title %></h1>
 
   <div class="problem-content">
     <p><%= @generated_problem["content"] %></p>
@@ -191,32 +195,50 @@
   <% if @check_result.present? %>
     <div class="result-box <%= @check_result[:correct] ? 'result-correct' : 'result-incorrect' %>">
       <p class="result-text">
-        <%= @check_result[:correct] ? " Ответ правильный!" : " Ответ неправильный!" %>
+        <%= @check_result[:correct] ? "Ответ правильный!" : "Ответ неправильный, попробуйте ещё раз." %>
       </p>
 
-      <p class="answer-line"><strong>Ваш ответ:</strong> <%= @check_result[:submitted_answer].presence || "—" %></p>
+      <p class="answer-line">
+        <strong>Ваш ответ:</strong>
+        <%= @check_result[:submitted_answer].presence || "—" %>
+      </p>
 
-      <% unless @check_result[:correct] %>
-        <p class="correct-answer"><strong>Правильный ответ:</strong> <%= @check_result[:correct_answer] %></p>
+      <% if @check_result[:correct] || @check_result[:show_solution] %>
+        <div class="solution-details">
+          <details open>
+            <summary class="solution-summary">Показать решение</summary>
+            <div class="solution-content">
+              <p><strong>Правильный ответ:</strong> <%= @generated_problem["correct_answer"] %></p>
+              <p><strong>Решение:</strong></p>
+              <p><%= @generated_problem["solution"] %></p>
+            </div>
+          </details>
+        </div>
       <% end %>
 
-      <div class="solution-details">
-        <details>
-          <summary class="solution-summary">Показать решение</summary>
-          <div class="solution-content">
-            <p><%= @generated_problem["solution"] %></p>
-          </div>
-        </details>
-      </div>
-    </div>
+      <% if !@check_result[:correct] && !@check_result[:show_solution] %>
+        <div class="action-buttons">
+          <%= form_with url: show_solution_topic_subtopic_problem_path(@topic, @subtopic, @problem), method: :post, local: true, data: { turbo: false } do %>
+            <%= hidden_field_tag :generated_content, @generated_problem["content"] %>
+            <%= hidden_field_tag :generated_correct_answer, @generated_problem["correct_answer"] %>
+            <%= hidden_field_tag :generated_solution, @generated_problem["solution"] %>
+            <%= hidden_field_tag :submitted_answer, @check_result[:submitted_answer] %>
 
-    <div>
-      <%= button_to "Следующая задача", next_generated_topic_subtopic_problem_path(@topic, @subtopic, @problem), method: :post, class: "next-btn" %>
-    </div>
+            <%= submit_tag "Показать решение", class: "submit-btn" %>
+          <% end %>
 
-  <% else %>
+          <%= button_to "Другая задача",
+                next_generated_topic_subtopic_problem_path(@topic, @subtopic, @problem),
+                method: :post,
+                class: "next-btn",
+                form: { data: { turbo: false } } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% unless @check_result.present? && @check_result[:correct] %>
     <%= form_with url: check_answer_topic_subtopic_problem_path(@topic, @subtopic, @problem), method: :post, local: true, data: { turbo: false } do %>
-
       <%= hidden_field_tag :generated_content, @generated_problem["content"] %>
       <%= hidden_field_tag :generated_correct_answer, @generated_problem["correct_answer"] %>
       <%= hidden_field_tag :generated_solution, @generated_problem["solution"] %>
@@ -228,5 +250,15 @@
 
       <%= submit_tag "Проверить", class: "submit-btn" %>
     <% end %>
+  <% end %>
+
+  <% if @check_result.present? && @check_result[:correct] %>
+    <div class="action-buttons">
+      <%= button_to "Следующая задача",
+            next_generated_topic_subtopic_problem_path(@topic, @subtopic, @problem),
+            method: :post,
+            class: "next-btn",
+            form: { data: { turbo: false } } %>
+    </div>
   <% end %>
 </div>

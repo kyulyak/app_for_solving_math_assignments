@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :problems, only: [ :show ] do
         post :check_answer, on: :member
         post :next_generated, on: :member
+        post :show_solution, on: :member
       end
     end
   end
