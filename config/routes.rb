@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "/progress", to: "progress#show", as: :progress
+
   get "dashboard", to: "dashboard#index"
   get "dashboard/progress", to: "dashboard#progress", as: :dashboard_progress
   get "dashboard/favorites", to: "dashboard#favorites", as: :dashboard_favorites
