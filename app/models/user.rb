@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :solved_problems, through: :attempts, source: :problem
   has_many :favorites, dependent: :destroy
   has_many :favorite_problems, through: :favorites, source: :problem
+  has_many :notes, dependent: :destroy
 
   # validates :first_name, :last_name, presence: true
 

@@ -1,26 +1,36 @@
 module ProblemGenerators
   class DerivativeProductGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       a = rand(2..9)
       n = rand(2..4)
       b = rand(2..9)
       m = rand(1..3)
 
-      content = "Найдите производную: (#{a}x^#{n}) * (#{b}x^#{m})"
-
       f = "#{a}x^#{n}"
       g = "#{b}x^#{m}"
+
+      f_latex = term(a, "x", n)
+      g_latex = term(b, "x", m)
+
       f_prime = derivative_of_power(a, n)
       g_prime = derivative_of_power(b, m)
 
+      f_prime_latex = latex_term(a * n, "x", n - 1)
+      g_prime_latex = latex_term(b * m, "x", m - 1)
+
       correct_coef = a * b * (n + m)
       correct_power = n + m - 1
-      correct_answer = build_term(correct_coef, correct_power)
+      correct_answer = "#{math(latex_term(correct_coef, "x", correct_power))}."
 
-      solution = "Используем правило производной произведения: (f * g)' = f' * g + f * g'. " \
-                 "Пусть f = #{f}, тогда f' = #{f_prime}. " \
-                 "Пусть g = #{g}, тогда g' = #{g_prime}. " \
-                 "После упрощения получаем: #{correct_answer}."
+      content = "Найдите производную: #{math("\\left(#{f_latex}\\right) \\cdot \\left(#{g_latex}\\right)")}"
+
+      solution = "Используем правило производной произведения: " \
+                 "#{math("(f \\cdot g)' = f' \\cdot g + f \\cdot g'")}. " \
+                 "Пусть #{math("f = #{f_latex}")}, тогда #{math("f' = #{f_prime_latex}")}. " \
+                 "Пусть #{math("g = #{g_latex}")}, тогда #{math("g' = #{g_prime_latex}")}. " \
+                 "После упрощения получаем: #{math(latex_term(correct_coef, "x", correct_power))}."
 
       {
         content: content,
@@ -45,6 +55,13 @@ module ProblemGenerators
       else
         "#{coef}x^#{power}"
       end
+    end
+
+    def latex_term(coef, variable, exponent)
+      return coef.to_s if exponent == 0
+      return "#{coef}#{variable}" if exponent == 1
+
+      "#{coef}#{variable}^{#{exponent}}"
     end
   end
 end

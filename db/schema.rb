@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_28_094250) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_08_105433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,6 +25,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_28_094250) do
     t.integer "time_spent"
     t.boolean "shown_solution"
     t.integer "attempt_number"
+    t.text "problem_content"
+    t.text "correct_answer"
+    t.text "solution"
     t.index ["problem_id"], name: "index_attempts_on_problem_id"
     t.index ["user_id"], name: "index_attempts_on_user_id"
   end
@@ -36,6 +39,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_28_094250) do
     t.datetime "updated_at", null: false
     t.index ["problem_id"], name: "index_favorites_on_problem_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reference_material_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reference_material_id"], name: "index_notes_on_reference_material_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "problems", force: :cascade do |t|
@@ -99,6 +112,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_28_094250) do
   add_foreign_key "attempts", "users"
   add_foreign_key "favorites", "problems"
   add_foreign_key "favorites", "users"
+  add_foreign_key "notes", "reference_materials"
+  add_foreign_key "notes", "users"
   add_foreign_key "problems", "subtopics"
   add_foreign_key "problems", "topics"
   add_foreign_key "reference_materials", "topics"

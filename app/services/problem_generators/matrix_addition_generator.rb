@@ -1,5 +1,7 @@
 module ProblemGenerators
   class MatrixAdditionGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       matrix_a = generate_matrix
       matrix_b = generate_matrix
@@ -15,13 +17,12 @@ module ProblemGenerators
         ]
       ]
 
-      content = "Сложите матрицы: #{matrix_to_string(matrix_a)} + #{matrix_to_string(matrix_b)}"
-      solution = "Складываем соответствующие элементы матриц. " \
-                 "Получаем #{matrix_to_string(result)}."
+      content = "Сложите матрицы: #{math("#{matrix_to_latex(matrix_a)} + #{matrix_to_latex(matrix_b)}")}"
+      solution = "Складываем соответствующие элементы матриц. Получаем #{math(matrix_to_latex(result))}."
 
       {
         content: content,
-        correct_answer: matrix_to_string(result),
+        correct_answer: matrix_to_plain(result),
         solution: solution
       }
     end
@@ -35,7 +36,7 @@ module ProblemGenerators
       ]
     end
 
-    def matrix_to_string(matrix)
+    def matrix_to_plain(matrix)
       "[[#{matrix[0][0]},#{matrix[0][1]}],[#{matrix[1][0]},#{matrix[1][1]}]]"
     end
   end

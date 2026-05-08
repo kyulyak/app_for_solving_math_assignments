@@ -1,12 +1,16 @@
 module ProblemGenerators
   class DerivativeCompositeGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       a = rand(2..5)
       n = rand(2..3)
       b = rand(1..9)
       m = rand(2..4)
 
-      inner = "#{a}x^#{n} + #{b}"
+      inner = "#{term(a, "x", n)} + #{b}"
+      inner_plain = "#{a}x^#{n} + #{b}"
+
       inner_derivative = derivative_of_inner(a, n)
 
       outer_coef = m
@@ -14,19 +18,20 @@ module ProblemGenerators
 
       outer_part =
         if outer_power == 1
-          "#{outer_coef}(#{inner})"
+          "#{outer_coef}(#{inner_plain})"
         else
-          "#{outer_coef}(#{inner})^#{outer_power}"
+          "#{outer_coef}(#{inner_plain})^#{outer_power}"
         end
 
-      correct_answer = "#{outer_part} * #{inner_derivative}"
+      correct_answer = "#{math("#{outer_coef}\\left(#{inner}\\right)^{#{outer_power}} \\cdot #{latex_term(a * n, "x", n - 1)}")}."
 
-      content = "Найдите производную: (#{inner})^#{m}"
+      content = "Найдите производную: #{math("\\left(#{inner}\\right)^{#{m}}")}"
 
-      solution = "Используем правило производной сложной функции: (f(g(x)))' = f'(g(x)) * g'(x). " \
-                 "Внешняя функция: u^#{m}, её производная: #{m}u^#{m - 1}. " \
-                 "Внутренняя функция: #{inner}, её производная: #{inner_derivative}. " \
-                 "Ответ: #{correct_answer}"
+      solution = "Используем правило производной сложной функции: " \
+                 "#{math("(f(g(x)))' = f'(g(x)) \\cdot g'(x)")}. " \
+                 "Внешняя функция: #{math("u^{#{m}}")}, её производная: #{math("#{m}u^{#{m - 1}}")}. " \
+                 "Внутренняя функция: #{math(inner)}, её производная: #{math(latex_term(a * n, "x", n - 1))}. " \
+                 "Ответ: #{math("#{outer_coef}\\left(#{inner}\\right)^{#{outer_power}} \\cdot #{latex_term(a * n, "x", n - 1)}")}."
 
       {
         content: content,
@@ -48,6 +53,13 @@ module ProblemGenerators
       else
         "#{new_coef}x^#{new_power}"
       end
+    end
+
+    def latex_term(coef, variable, exponent)
+      return coef.to_s if exponent == 0
+      return "#{coef}#{variable}" if exponent == 1
+
+      "#{coef}#{variable}^{#{exponent}}"
     end
   end
 end

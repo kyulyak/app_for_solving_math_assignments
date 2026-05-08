@@ -1,15 +1,21 @@
 module ProblemGenerators
   class MatrixDeterminantGenerator < BaseGenerator
+    include MathFormatting
+
     def call
-      a = rand(1..6)
-      b = rand(1..6)
-      c = rand(1..6)
-      d = rand(1..6)
+      matrix = [
+        [ rand(1..6), rand(1..6) ],
+        [ rand(1..6), rand(1..6) ]
+      ]
+
+      a, b = matrix[0]
+      c, d = matrix[1]
 
       determinant = a * d - b * c
 
-      content = "Найдите определитель матрицы: [[#{a},#{b}],[#{c},#{d}]]"
-      solution = "Для матрицы 2x2 определитель вычисляется по формуле ad - bc. " \
+      content = "Найдите определитель матрицы: #{math(matrix_to_latex(matrix))}"
+
+      solution = "Для матрицы 2×2 определитель вычисляется по формуле #{math('ad - bc')}. " \
                  "#{a} * #{d} - #{b} * #{c} = #{determinant}."
 
       {

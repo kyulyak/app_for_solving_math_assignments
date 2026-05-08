@@ -1,5 +1,7 @@
 module ProblemGenerators
   class SubstitutionLimitGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       a = rand(1..5)
       b = rand(1..5)
@@ -19,9 +21,12 @@ module ProblemGenerators
       value = numerator.to_f / denominator
       formatted_value = format_number(value)
 
-      content = "Найдите предел: lim x->#{point} (#{a}x + #{b}) / (#{c}x + #{d})"
-      solution = "Подставляем x = #{point}, так как знаменатель не обращается в ноль. " \
-                 "(#{a} * #{point} + #{b}) / (#{c} * #{point} + #{d}) = #{formatted_value}."
+      expression = "\\frac{#{term(a, "x", 1)} + #{b}}{#{term(c, "x", 1)} + #{d}}"
+
+      content = "Найдите предел: #{math("\\lim_{x \\to #{point}} #{expression}")}"
+
+      solution = "Подставляем #{math("x = #{point}")}, так как знаменатель не обращается в ноль. " \
+                 "#{math("\\frac{#{a} \\cdot #{point} + #{b}}{#{c} \\cdot #{point} + #{d}} = #{formatted_value}")}."
 
       {
         content: content,
@@ -33,11 +38,7 @@ module ProblemGenerators
     private
 
     def format_number(value)
-      if value == value.to_i
-        value.to_i.to_s
-      else
-        value.round(2).to_s
-      end
+      value == value.to_i ? value.to_i.to_s : value.round(2).to_s
     end
   end
 end

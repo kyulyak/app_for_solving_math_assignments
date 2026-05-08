@@ -1,14 +1,17 @@
 module ProblemGenerators
   class MatrixMultiplicationGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       matrix_a = generate_matrix
       matrix_b = generate_matrix
 
       result = multiply(matrix_a, matrix_b)
 
-      content = "Умножьте матрицы: #{matrix_to_string(matrix_a)} * #{matrix_to_string(matrix_b)}"
+      content = "Умножьте матрицы: #{math("#{matrix_to_latex(matrix_a)} \\cdot #{matrix_to_latex(matrix_b)}")}"
+
       solution = "При умножении матриц каждый элемент новой матрицы вычисляется как сумма произведений элементов строки на элементы столбца. " \
-                 "Получаем #{matrix_to_string(result)}."
+                 "Получаем #{math(matrix_to_latex(result))}."
 
       {
         content: content,

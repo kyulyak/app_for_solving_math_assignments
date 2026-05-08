@@ -1,5 +1,7 @@
 module ProblemGenerators
   class PolynomialLimitGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       a = rand(1..4)
       b = rand(1..6)
@@ -8,9 +10,12 @@ module ProblemGenerators
 
       value = a * point**2 + b * point + c
 
-      content = "Найдите предел: lim x->#{point} (#{a}x^2 + #{b}x + #{c})"
+      expression = "#{term(a, "x", 2)} + #{term(b, "x", 1)} + #{c}"
+
+      content = "Найдите предел: #{math("\\lim_{x \\to #{point}} \\left(#{expression}\\right)")}"
+
       solution = "Полином непрерывен, поэтому предел равен значению функции в точке. " \
-                 "#{a} * #{point}^2 + #{b} * #{point} + #{c} = #{value}."
+                 "#{math("#{a} \\cdot #{point}^{2} + #{b} \\cdot #{point} + #{c} = #{value}")}."
 
       {
         content: content,

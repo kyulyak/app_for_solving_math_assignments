@@ -1,5 +1,7 @@
 module ProblemGenerators
   class MatrixInverseGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       matrix, determinant = generate_invertible_matrix
 
@@ -13,10 +15,12 @@ module ProblemGenerators
         [ -c, a ]
       ]
 
-      content = "Найдите обратную матрицу для: [[#{a},#{b}],[#{c},#{d}]]"
-      solution = "Для матрицы 2x2 обратная матрица вычисляется как (1/det) * [[d,-b],[-c,a]]. " \
-                 "Определитель: #{a} * #{d} - #{b} * #{c} = #{determinant}. " \
-                 "Значит, обратная матрица: (1/#{determinant}) * #{inverse_as_string(inverse)}."
+      content = "Найдите обратную матрицу для: #{math(matrix_to_latex(matrix))}"
+
+      solution = "Для матрицы 2×2 обратная матрица вычисляется по формуле " \
+                 "#{math("A^{-1} = \\frac{1}{\\det A}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}")}. " \
+                 "Определитель: #{math("#{a} \\cdot #{d} - #{b} \\cdot #{c} = #{determinant}")}. " \
+                 "Значит, обратная матрица: #{math("\\frac{1}{#{determinant}}#{matrix_to_latex(inverse)}")}."
 
       {
         content: content,

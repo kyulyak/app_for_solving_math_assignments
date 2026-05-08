@@ -1,5 +1,7 @@
 module ProblemGenerators
   class DefiniteIntegralGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       a = rand(1..4)
       n = rand(1..3)
@@ -16,9 +18,11 @@ module ProblemGenerators
 
       formatted_value = format_number(value)
 
-      content = "Найдите определенный интеграл: ∫[#{left};#{right}] #{a}x^#{n} dx"
-      solution = "Первообразная для #{a}x^#{n} равна #{a}x^#{antiderivative_power}/#{antiderivative_power}. " \
-                 "Подставляем пределы интегрирования: получаем #{formatted_value}."
+      expr = term(a, "x", n)
+      content = "Найдите определенный интеграл: #{math(definite_integral(left, right, expr))}"
+
+      solution = "Первообразная: #{math("\\frac{#{a}x^{#{antiderivative_power}}}{#{antiderivative_power}}")}. " \
+                 "Ответ: #{formatted_value}."
 
       {
         content: content,
@@ -30,11 +34,7 @@ module ProblemGenerators
     private
 
     def format_number(value)
-      if value == value.to_i
-        value.to_i.to_s
-      else
-        value.round(2).to_s
-      end
+      value == value.to_i ? value.to_i.to_s : value.round(2).to_s
     end
   end
 end

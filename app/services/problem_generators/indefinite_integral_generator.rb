@@ -1,24 +1,19 @@
 module ProblemGenerators
   class IndefiniteIntegralGenerator < BaseGenerator
+    include MathFormatting
+
     def call
       a = rand(2..6)
       n = rand(1..4)
 
-      content = "Найдите неопределенный интеграл: ∫ #{a}x^#{n} dx"
+      expr = term(a, "x", n)
+      content = "Найдите неопределенный интеграл: #{math(integral(expr))}"
 
       new_power = n + 1
-      new_coef = "#{a}/#{new_power}"
+      correct_answer = "#{math("\\frac{#{a}x^{#{new_power}}}{#{new_power}} + C")}"
 
-      integral =
-        if new_power == 1
-          "#{new_coef}x"
-        else
-          "#{new_coef}x^#{new_power}"
-        end
-
-      correct_answer = "#{integral} + C"
-      solution = "Используем формулу ∫ x^n dx = x^(n+1)/(n+1) + C. " \
-                 "Тогда ∫ #{a}x^#{n} dx = #{a} * x^#{new_power}/#{new_power} + C = #{correct_answer}."
+      solution = "Используем формулу #{math('\\int x^n\\,dx = \\frac{x^{n+1}}{n+1} + C')}. " \
+                 "Ответ: #{math("\\frac{#{a}x^{#{new_power}}}{#{new_power}} + C")}"
 
       {
         content: content,

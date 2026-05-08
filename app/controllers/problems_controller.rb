@@ -36,7 +36,10 @@ class ProblemsController < ApplicationController
         task: @problem,
         submitted_answer: params[:submitted_answer],
         is_correct: false,
-        shown_solution: true
+        shown_solution: true,
+        problem_content: @generated_problem["content"],
+        correct_answer: @generated_problem["correct_answer"],
+        solution: @generated_problem["solution"]
       ).call
     end
 
@@ -82,7 +85,10 @@ class ProblemsController < ApplicationController
       user: current_user,
       task: @problem,
       submitted_answer: submitted_answer,
-      is_correct: @check_result[:correct]
+      is_correct: @check_result[:correct],
+      problem_content: @generated_problem["content"],
+      correct_answer: @generated_problem["correct_answer"],
+      solution: @generated_problem["solution"]
     ).call
   end
 end

@@ -23,5 +23,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reference, only: [ :index, :show ] do
+  resources :notes, only: [ :create, :update, :destroy ]
+  end
+
   resources :favorites, only: [ :create, :destroy ]
 end

@@ -11,7 +11,7 @@
   border: none;
   box-shadow: none;
   padding: 0;
-  text-align: center; 
+  text-align: center;
 }
 
 .progress-hero h1 {
@@ -94,51 +94,72 @@
   content: "▲";
 }
 
-.history-box__hint {
-  margin-left: auto;
-  margin-right: 16px;
-  color: #64748b;
-  font-size: 14px;
-  font-weight: 500;
-}
-
 .history-list {
   margin-top: 22px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .history-item {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 22px;
 }
 
 .history-item__top {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 12px;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 18px;
 }
 
-.history-item h3 {
-  font-size: 18px;
-  color: #1e293b;
+.history-item__title h3 {
+  font-size: 20px;
+  color: #0f172a;
+  margin-bottom: 8px;
 }
 
-.history-item p {
-  color: #475569;
-  margin-top: 6px;
+.history-item__title p {
+  color: #64748b;
+  margin: 0;
+}
+
+.history-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.history-row {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.history-row strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.history-row p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.6;
+  word-break: break-word;
 }
 
 .result-badge {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .result-badge--success {
@@ -157,25 +178,22 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .progress-stats {
     grid-template-columns: 1fr;
   }
 
-  .progress-hero {
-    padding: 24px;
+  .history-item__top {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .progress-hero h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .history-box summary {
     font-size: 18px;
-  }
-
-  .history-box__hint {
-    display: none;
   }
 }
 </style>
@@ -183,7 +201,7 @@
 <section class="progress-page">
   <div class="progress-hero">
     <h1>Мой прогресс</h1>
-    <p>Здесь можно посмотреть уже решенные вами задания </p>
+    <p>Здесь можно посмотреть историю решений и результаты попыток</p>
   </div>
 
   <div class="progress-stats">
@@ -208,27 +226,78 @@
     </div>
   </div>
 
-  <details class="history-box">
+  <details class="history-box" open>
     <summary>
       <span>История решений</span>
-      <span class="history-box__hint"></span>
     </summary>
 
     <div class="history-list">
       <% @attempts.each do |attempt| %>
         <div class="history-item">
           <div class="history-item__top">
-            <h3><%= attempt.problem.title %></h3>
+            <div class="history-item__title">
+              <h3><%= attempt.problem.title %></h3>
+
+              <p>
+                <strong>Тема:</strong>
+                <%= attempt.problem.topic.title %>
+              </p>
+            </div>
 
             <% if attempt.is_correct? %>
-              <span class="result-badge result-badge--success">Верно</span>
+              <span class="result-badge result-badge--success">
+                Верно
+              </span>
             <% else %>
-              <span class="result-badge result-badge--error">Неверно</span>
+              <span class="result-badge result-badge--error">
+                Неверно
+              </span>
             <% end %>
           </div>
 
-          <p><strong>Попытка №:</strong> <%= attempt.attempt_number %></p>
-          <p><strong>Ответ:</strong> <%= attempt.user_answer %></p>
+          <div class="history-content">
+
+            <div class="history-row">
+              <strong>Задача</strong>
+
+              <p>
+                <%= attempt.problem_content.presence || attempt.problem.content %>
+              </p>
+            </div>
+
+            <div class="history-row">
+              <strong>Ваш ответ</strong>
+
+              <p>
+                <%= attempt.user_answer.presence || "Решение было показано" %>
+              </p>
+            </div>
+
+            <div class="history-row">
+              <strong>Правильный ответ</strong>
+
+              <p>
+                <%= attempt.correct_answer.presence || attempt.problem.correct_answer %>
+              </p>
+            </div>
+
+            <div class="history-row">
+              <strong>Правильное решение</strong>
+
+              <p>
+                <%= attempt.solution.presence || attempt.problem.solution %>
+              </p>
+            </div>
+
+            <div class="history-row">
+              <strong>Дата решения</strong>
+
+              <p>
+                <%= attempt.created_at.strftime("%d.%m.%Y %H:%M") %>
+              </p>
+            </div>
+
+          </div>
         </div>
       <% end %>
     </div>
