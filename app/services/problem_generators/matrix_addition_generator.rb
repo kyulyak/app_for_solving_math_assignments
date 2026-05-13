@@ -23,7 +23,10 @@ module ProblemGenerators
       {
         content: content,
         correct_answer: matrix_to_plain(result),
-        solution: solution
+        solution: solution,
+        answer_type: "matrix",
+        matrix_rows: 2,
+        matrix_cols: 2
       }
     end
 

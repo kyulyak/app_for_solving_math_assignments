@@ -168,6 +168,71 @@
     margin-top: 16px;
   }
 
+  .matrix-answer-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .matrix-answer {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 22px;
+    background: white;
+    border-left: 4px solid #0f172a;
+    border-right: 4px solid #0f172a;
+    border-radius: 18px;
+  }
+
+  .matrix-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .matrix-cell {
+    width: 64px;
+    height: 48px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .matrix-cell:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
+  .factor-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .factor-label {
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .factor-input {
+    width: 140px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .factor-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
   @media (max-width: 768px) {
     .problem-page {
       padding: 20px 16px;
@@ -179,6 +244,11 @@
 
     .problem-content {
       padding: 18px;
+    }
+
+    .matrix-cell {
+      width: 52px;
+      height: 44px;
     }
   }
 </style>
@@ -222,6 +292,9 @@
             <%= hidden_field_tag :generated_content, @generated_problem["content"] %>
             <%= hidden_field_tag :generated_correct_answer, @generated_problem["correct_answer"] %>
             <%= hidden_field_tag :generated_solution, @generated_problem["solution"] %>
+            <%= hidden_field_tag :generated_answer_type, @generated_problem["answer_type"] %>
+            <%= hidden_field_tag :generated_matrix_rows, @generated_problem["matrix_rows"] %>
+            <%= hidden_field_tag :generated_matrix_cols, @generated_problem["matrix_cols"] %>
             <%= hidden_field_tag :submitted_answer, @check_result[:submitted_answer] %>
 
             <%= submit_tag "Показать решение", class: "submit-btn" %>
@@ -242,10 +315,44 @@
       <%= hidden_field_tag :generated_content, @generated_problem["content"] %>
       <%= hidden_field_tag :generated_correct_answer, @generated_problem["correct_answer"] %>
       <%= hidden_field_tag :generated_solution, @generated_problem["solution"] %>
+      <%= hidden_field_tag :generated_answer_type, @generated_problem["answer_type"] %>
+      <%= hidden_field_tag :generated_matrix_rows, @generated_problem["matrix_rows"] %>
+      <%= hidden_field_tag :generated_matrix_cols, @generated_problem["matrix_cols"] %>
 
       <div class="form-group">
         <%= label_tag :submitted_answer, "Ваш ответ", class: "form-label" %>
-        <%= text_field_tag :submitted_answer, nil, class: "form-input", placeholder: "Введите ваш ответ..." %>
+
+        <% if @generated_problem["answer_type"] == "matrix" || @generated_problem["answer_type"] == "matrix_with_factor" %>
+          <% if @generated_problem["answer_type"] == "matrix_with_factor" %>
+            <div class="factor-row">
+              <span class="factor-label">Множитель перед матрицей:</span>
+              <%= text_field_tag :submitted_factor,
+                    nil,
+                    class: "factor-input",
+                    placeholder: "например: 1/3" %>
+            </div>
+          <% end %>
+
+          <div class="matrix-answer-wrapper">
+            <div class="matrix-answer">
+              <% @generated_problem["matrix_rows"].to_i.times do |i| %>
+                <div class="matrix-row">
+                  <% @generated_problem["matrix_cols"].to_i.times do |j| %>
+                    <%= text_field_tag "submitted_answer[#{i}][#{j}]",
+                          nil,
+                          class: "matrix-cell",
+                          autocomplete: "off" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <%= text_field_tag :submitted_answer,
+                nil,
+                class: "form-input",
+                placeholder: "Введите ваш ответ..." %>
+        <% end %>
       </div>
 
       <%= submit_tag "Проверить", class: "submit-btn" %>

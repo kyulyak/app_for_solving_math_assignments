@@ -25,7 +25,10 @@ module ProblemGenerators
       {
         content: content,
         correct_answer: "(1/#{determinant})*#{inverse_as_string(inverse)}",
-        solution: solution
+        solution: solution,
+        answer_type: "matrix_with_factor",
+        matrix_rows: 2,
+        matrix_cols: 2
       }
     end
 
