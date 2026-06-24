@@ -63,6 +63,15 @@
     color: #991b1b;
   }
 
+  .result-error {
+    background: #fff7ed;
+    border-color: #fdba74;
+  }
+
+  .result-error .result-text {
+    color: #c2410c;
+  }
+
   .result-text {
     font-weight: 700;
     font-size: 18px;
@@ -263,9 +272,21 @@
   </div>
 
   <% if @check_result.present? %>
-    <div class="result-box <%= @check_result[:correct] ? 'result-correct' : 'result-incorrect' %>">
+    <div class="result-box
+      <%= if @check_result[:error].present?
+            'result-error'
+          elsif @check_result[:correct]
+            'result-correct'
+          else
+            'result-incorrect'
+          end %>">
+
       <p class="result-text">
-        <%= @check_result[:correct] ? "Ответ правильный!" : "Ответ неправильный, попробуйте ещё раз." %>
+        <% if @check_result[:error].present? %>
+          <%= @check_result[:error] %>
+        <% else %>
+          <%= @check_result[:correct] ? "Ответ правильный!" : "Ответ неправильный, попробуйте ещё раз." %>
+        <% end %>
       </p>
 
       <p class="answer-line">
@@ -323,35 +344,47 @@
         <%= label_tag :submitted_answer, "Ваш ответ", class: "form-label" %>
 
         <% if @generated_problem["answer_type"] == "matrix" || @generated_problem["answer_type"] == "matrix_with_factor" %>
+
           <% if @generated_problem["answer_type"] == "matrix_with_factor" %>
             <div class="factor-row">
               <span class="factor-label">Множитель перед матрицей:</span>
+
               <%= text_field_tag :submitted_factor,
                     nil,
                     class: "factor-input",
-                    placeholder: "например: 1/3" %>
+                    placeholder: "например: 1/3",
+                    required: true %>
             </div>
           <% end %>
 
           <div class="matrix-answer-wrapper">
             <div class="matrix-answer">
+
               <% @generated_problem["matrix_rows"].to_i.times do |i| %>
                 <div class="matrix-row">
+
                   <% @generated_problem["matrix_cols"].to_i.times do |j| %>
                     <%= text_field_tag "submitted_answer[#{i}][#{j}]",
                           nil,
                           class: "matrix-cell",
-                          autocomplete: "off" %>
+                          autocomplete: "off",
+                          required: true %>
                   <% end %>
+
                 </div>
               <% end %>
+
             </div>
           </div>
+
         <% else %>
+
           <%= text_field_tag :submitted_answer,
                 nil,
                 class: "form-input",
-                placeholder: "Введите ваш ответ..." %>
+                placeholder: "Введите ваш ответ...",
+                required: true %>
+
         <% end %>
       </div>
 

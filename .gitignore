@@ -40,3 +40,4 @@
 .env
 .parcel-cache
 
+.kamal/secrets
